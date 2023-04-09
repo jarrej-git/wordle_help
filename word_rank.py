@@ -13,8 +13,9 @@ with open("letter_counts.txt", "r") as input_file:
 with open("words_five_lower.txt", "r") as input_file:
     # Initialize a dictionary to store the word rankings
     word_rankings = {}
-    # Ask the user if any letters should be excluded
+    # Ask the user for letters to exclude and include
     exclude_letters = input("Enter any letters to exclude (leave blank for none): ")
+    include_letters = input("Enter any letters to include (leave blank for all): ")
     # Loop over each line in the input file
     for line in input_file:
         # Strip any newline characters from the line and convert it to a set of letters
@@ -22,6 +23,9 @@ with open("words_five_lower.txt", "r") as input_file:
         # Exclude any letters specified by the user
         if exclude_letters:
             word_letters = word_letters - set(exclude_letters)
+        # Include any letters specified by the user
+        if include_letters:
+            word_letters = word_letters.intersection(set(include_letters))
         # Compute the total letter count for the word
         total_count = sum(letter_counts.get(letter, 0) for letter in word_letters)
         # Store the word and its ranking in the word_rankings dictionary
@@ -31,3 +35,4 @@ with open("words_five_lower.txt", "r") as input_file:
 print("Top 10 words by letter count ranking:")
 for word, ranking in sorted(word_rankings.items(), key=lambda x: x[1], reverse=True)[:10]:
     print(f"{word}: {ranking}")
+
