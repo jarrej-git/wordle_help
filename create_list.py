@@ -5,7 +5,7 @@ length = 5 #sets length of words to extract for new file.  Instead of setting ma
 # Open the input file
 with open("web2", "r") as input_file:
     # Open the output file
-    with open("output2.txt", "w") as output_file:
+    with open("output4.txt", "w") as output_file:
         # Loop over each line in the input file
         for line in input_file:
             # Split the line into words
