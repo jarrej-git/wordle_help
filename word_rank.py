@@ -18,18 +18,24 @@ with open("words_five_lower.txt", "r") as input_file:
     include_letters = input("Enter any letters to include (leave blank for all): ")
     # Loop over each line in the input file
     for line in input_file:
-        # Strip any newline characters from the line and convert it to a set of letters
-        word_letters = set(line.strip())
+        # Strip any newline characters from the line and convert it to a list of letters
+        word_letters = list(line.strip())
         # Exclude any letters specified by the user
         if exclude_letters:
             if any(letter in exclude_letters for letter in word_letters):
                 continue
         # Include any letters specified by the user
         if include_letters:
-            if not all(letter in include_letters for letter in word_letters):
+            # Remove any letters that are not included
+            word_letters = [letter for letter in word_letters if letter in include_letters]
+            if len(word_letters) < len(include_letters):
                 continue
+        # Skip words with repeated letters
+        if len(word_letters) != len(set(word_letters)):
+            continue
         # Compute the total letter count for the word
-        total_count = sum(letter_counts.get(letter, 0) for letter in word_letters)
+        letter_counts_word = [letter_counts.get(letter, 0) for letter in word_letters]
+        total_count = sum(letter_counts_word)
         # Store the word and its ranking in the word_rankings dictionary
         word_rankings[line.strip()] = total_count
 
