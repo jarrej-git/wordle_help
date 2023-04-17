@@ -37,7 +37,8 @@ with open("words_five_lower.txt", "r") as input_file:
         letter_counts_word = [letter_counts.get(letter, 0) for letter in word_letters]
         total_count = sum(letter_counts_word)
         # Store the word and its ranking in the word_rankings dictionary
-        word_rankings[line.strip()] = total_count
+        word_rankings[line.strip()
+        ] = total_count
 
 # Print the top 10 words by letter count ranking
 print("Top 10 words by letter count ranking:")
